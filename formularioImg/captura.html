@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario de Jugador</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 30px;
+            background-color: #aaa9c1;
+            font-family: monospace;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 25px;
+        }
+
+        form {
+            width: 380px;
+            margin: auto;
+            background-color: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px #777;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="file"] {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 7px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        fieldset {
+            margin-top: 15px;
+            border: 1px solid #ddd;
+        }
+
+        fieldset label {
+            font-weight: normal;
+        }
+
+        .botones {
+            margin-top: 15px;
+        }
+
+        input[type="submit"],
+        input[type="reset"] {
+            background-color: #1683ed;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 5px;
+        }
+
+        input[type="submit"]:hover,
+        input[type="reset"]:hover {
+            background-color: #006dcc;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Formulario de Jugador</h1>
+
+    <form action="index.php" method="POST" enctype="multipart/form-data">
+
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required>
+
+        <br><br>
+
+        <label for="alias">Alias:</label>
+        <input type="text" id="alias" name="alias" required>
+
+        <br><br>
+
+        <label for="edad">Edad:</label>
+        <input type="number" id="edad" name="edad" min="0" required>
+
+        <fieldset>
+            <legend>Armas a elegir (puedes elegir varias):</legend>
+
+            <input type="checkbox" id="maza" name="armas[]" value="Maza">
+            <label for="maza">Maza</label>
+            <br>
+
+            <input type="checkbox" id="antorcha" name="armas[]" value="Antorcha">
+            <label for="antorcha">Antorcha</label>
+            <br>
+
+            <input type="checkbox" id="martillo" name="armas[]" value="Martillo">
+            <label for="martillo">Martillo</label>
+            <br>
+
+            <input type="checkbox" id="latigo" name="armas[]" value="Látigo">
+            <label for="latigo">Látigo</label>
+        </fieldset>
+
+        <fieldset>
+            <legend>¿Practica artes mágicas?</legend>
+
+            <input type="radio" id="si" name="magia" value="Sí" checked>
+            <label for="si">Sí</label>
+            <br>
+
+            <input type="radio" id="no" name="magia" value="No">
+            <label for="no">No</label>
+        </fieldset>
+
+        <br>
+
+        <label for="imagen">Subir imagen:</label>
+        <input type="file"
+               id="imagen"
+               name="imagen"
+               accept="image/png">
+
+        <div class="botones">
+            <input type="submit" value="Enviar">
+            <input type="reset" value="Borrar">
+        </div>
+
+    </form>
+
+
+    <script>
+
+        const formulario = document.querySelector("form");
+        const imagen = document.querySelector("#imagen");
+
+        formulario.addEventListener("submit", function(event) {
+
+            if (imagen.files.length > 0) {
+
+                const archivo = imagen.files[0];
+
+                // Solo PNG
+                if (archivo.type !== "image/png") {
+
+                    alert("Solo se permiten imágenes PNG.");
+                    event.preventDefault();
+                    return;
+                }
+
+                // Máximo 10 KB
+                if (archivo.size > 10 * 1024) {
+
+                    alert("La imagen no puede superar los 10 KB.");
+                    event.preventDefault();
+                    return;
+                }
+            }
+
+        });
+
+    </script>
+
+</body>
+
+</html>
