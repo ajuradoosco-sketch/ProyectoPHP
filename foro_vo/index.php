@@ -1,6 +1,6 @@
 
 
-<?
+<?php
 // PRIMERA APROXIMACIÓN AL MODELO VISTA CONTROLADOR. 
 // Funciones auxiliars Ej- usuarioOK
 include_once 'app/funciones.php';
